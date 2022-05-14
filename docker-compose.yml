@@ -1,0 +1,16 @@
+version: '3.8'
+services:
+  postgresql:
+    image: 'postgres:alpine'
+    restart: 'on-failure'
+    volumes:
+      - 'postgres-data-spring-boot-quartz-postgres-experiment:/var/lib/postgresql/data'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_DB: 'spring-boot-quartz-postgres-experiment'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'postgres'
+volumes:
+  postgres-data-spring-boot-quartz-postgres-experiment:
+    driver: 'local'

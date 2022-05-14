@@ -1,0 +1,38 @@
+# System Configuration
+server:
+  port: 8080
+  servlet:
+    context-path: /experiment/api
+
+logging:
+  level:
+    dev:
+      ashikuzzaman:
+        experiment: DEBUG
+
+# Spring Configuration
+spring:
+  main:
+    lazy-initialization: true
+  # Database Configuration
+  datasource:
+    url: jdbc:postgresql://localhost:5432/spring-boot-quartz-postgres-experiment
+    username: postgres
+    password: postgres
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: none
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+  quartz:
+    job-store-type: jdbc
+    jdbc:
+      initialize-schema: always
+    properties:
+      org:
+        quartz:
+          jobStore:
+            driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
