@@ -4,6 +4,12 @@ server:
   servlet:
     context-path: /experiment/api
 
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
 logging:
   level:
     dev:
