@@ -42,3 +42,11 @@ spring:
         quartz:
           jobStore:
             driverDelegateClass: org.quartz.impl.jdbcjobstore.PostgreSQLDelegate
+
+# Custom Configuration
+custom:
+  scheduler:
+    job:
+      identity-prefix: DETAILS_
+      trigger-prefix: TRIGGER_
+

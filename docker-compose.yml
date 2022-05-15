@@ -2,6 +2,8 @@ version: '3.8'
 services:
   postgresql:
     image: 'postgres:alpine'
+    hostname: postgresql
+    container_name: postgresql
     restart: 'on-failure'
     volumes:
       - 'postgres-data-spring-boot-quartz-postgres-experiment:/var/lib/postgresql/data'
