@@ -17,7 +17,7 @@ import java.util.Optional;
 @Slf4j
 @RequiredArgsConstructor
 @Component
-public class JobCreatorServiceImpl implements JobCreatorService {
+public class JobServiceImpl implements JobService {
 
     private final Scheduler scheduler;
 
@@ -32,7 +32,6 @@ public class JobCreatorServiceImpl implements JobCreatorService {
         log.debug("Calling: JobCreatorServiceImpl.createJobDetail");
         return JobBuilder.newJob()
                 .ofType(request.jobType().getJobClass())
-//                .storeDurably()
                 .withIdentity(this.identityPrefix + request.jobIdentity())
                 .withDescription(request.jobDescription())
                 .build();

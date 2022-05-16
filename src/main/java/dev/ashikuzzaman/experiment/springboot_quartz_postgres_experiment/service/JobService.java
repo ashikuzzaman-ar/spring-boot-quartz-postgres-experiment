@@ -8,7 +8,7 @@ import org.quartz.Trigger;
 
 import java.util.Optional;
 
-public interface JobCreatorService {
+public interface JobService {
     JobDetail createJobDetail(JobScheduleRequest request);
 
     Trigger createTrigger(JobScheduleRequest request, JobDetail jobDetail);
