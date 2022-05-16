@@ -11,3 +11,7 @@ Demo project for experimenting quartz in jdbc job store with postgresql in sprin
 2. Check whether you have a new database created in postgres named `spring-boot-quartz-postgres-experiment`. If not, create that.
 3. Build the project using `mvn clean package`
 4. Run the project `java -jar spring-boot-quartz-postgres-experiment-0.0.1-SNAPSHOT.jar`
+
+# Api Documentation
+1. Run the project
+2. Hit the following url: http://localhost:8080/experiment/api/swagger-ui/index.html
