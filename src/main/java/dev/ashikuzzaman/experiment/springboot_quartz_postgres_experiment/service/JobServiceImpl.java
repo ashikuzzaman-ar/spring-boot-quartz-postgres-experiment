@@ -3,6 +3,7 @@ package dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.servic
 import dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.dto.JobRemoveRequest;
 import dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.dto.JobScheduleRequest;
 import dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.dto.JobScheduleResponse;
+import dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.exception.InternalServerErrorException;
 import dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.exception.NullParameterException;
 import dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.exception.SchedulerCreationException;
 import dev.ashikuzzaman.experiment.springboot_quartz_postgres_experiment.exception.SchedulerRemoveException;
@@ -78,10 +79,17 @@ public class JobServiceImpl implements JobService {
     public void removeJob(JobRemoveRequest request) {
         log.debug("Calling: JobCreatorServiceImpl.removeJob");
         try {
-            this.scheduler.unscheduleJob(TriggerKey.triggerKey(this.triggerPrefix + request.jobIdentity()));
-        } catch (Exception e) {
+            String triggerKey = this.triggerPrefix + request.jobIdentity();
+            if (this.scheduler.checkExists(TriggerKey.triggerKey(triggerKey))) {
+                this.scheduler.unscheduleJob(TriggerKey.triggerKey(triggerKey));
+                log.debug("Trigger removed with key: {}", triggerKey);
+            } else {
+                log.debug("No trigger found with key: {}", triggerKey);
+                throw new SchedulerRemoveException();
+            }
+        } catch (SchedulerException e) {
             log.error("Exception in removing job with identity: {}", request.jobIdentity());
-            throw new SchedulerRemoveException();
+            throw new InternalServerErrorException();
         }
     }
 }
