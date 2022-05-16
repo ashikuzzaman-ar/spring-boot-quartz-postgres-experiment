@@ -4,6 +4,10 @@ server:
   servlet:
     context-path: /experiment/api
 
+springdoc:
+  api-docs:
+    path: /api-docs
+
 management:
   endpoints:
     web:
